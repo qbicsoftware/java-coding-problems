@@ -11,8 +11,7 @@ public class Problem58 {
 
   public static void main(String[] args) throws ParseException {
 
-    //String dateString = readInput();
-    String dateString = " 23-04-1999 ";
+    String dateString = readInput();
     Date date = toDate(dateString);
     System.out.println("date = " + date);
   }
@@ -23,7 +22,7 @@ public class Problem58 {
   }
 
   private static Date toDate(String str) throws ParseException {
-    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy", Locale.GERMANY);
+    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss", Locale.GERMANY);
     return simpleDateFormat.parse(str);
   }
 
