@@ -33,6 +33,12 @@ public class Problem99 {
     int [] shuffled = arrayShuffle(testIntSorting);
     System.out.println("shuffel int array " + Arrays.toString(shuffled));
     //TODO shuffle test object array
+
+    int[] testBogoSorting = new int[7];
+    testBogoSorting = fill(testBogoSorting);
+    System.out.println("testBogoSorting = " + Arrays.toString(testBogoSorting));
+    bogoSort(testBogoSorting);
+    System.out.println("testBogoSorting = " + Arrays.toString(testBogoSorting));
   }
 
   public static int[] arrayShuffle(int[] toShuffle){
@@ -44,6 +50,16 @@ public class Problem99 {
     }
 
     return shuffled;
+  }
+  public static void bogoSort(int[] toBeSorted) {
+    int[] indicator = toBeSorted.clone();
+    int tries = 0;
+    Arrays.sort(indicator);
+    while(!Arrays.equals(indicator, toBeSorted)) {
+      tries++;
+      toBeSorted = arrayShuffle(toBeSorted);
+    }
+    System.out.println("took "+tries+ " shuffles");
   }
 
   public static void bubbleSort(int[] toBeSorted) {
