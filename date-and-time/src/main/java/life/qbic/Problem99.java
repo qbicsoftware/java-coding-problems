@@ -1,6 +1,7 @@
 package life.qbic;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Objects;
 import java.util.Random;
 
@@ -28,7 +29,21 @@ public class Problem99 {
     Arrays.sort(testObjectSorting);
     System.out.println("testObjectSorting (Arrays.sort)= " + Arrays.toString(testObjectSorting));
     //TODO shuffle test integer array
+    System.out.println("previous state " + Arrays.toString((testIntSorting)));
+    int [] shuffled = arrayShuffle(testIntSorting);
+    System.out.println("shuffel int array " + Arrays.toString(shuffled));
     //TODO shuffle test object array
+  }
+
+  public static int[] arrayShuffle(int[] toShuffle){
+    int[] shuffled = new int [toShuffle.length];
+    List<Integer> shuffleOrder = new Random().ints(0, toShuffle.length).distinct().limit(toShuffle.length).boxed().toList();
+
+    for(int i = 0; i < toShuffle.length; i++){
+      shuffled[shuffleOrder.get(i)] = toShuffle[i];
+    }
+
+    return shuffled;
   }
 
   public static void bubbleSort(int[] toBeSorted) {
