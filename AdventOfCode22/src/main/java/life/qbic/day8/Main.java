@@ -2,6 +2,7 @@ package life.qbic.day8;
 
 import java.util.Arrays;
 import java.util.List;
+import life.qbic.Inputs;
 
 /**
  * <b>short description</b>

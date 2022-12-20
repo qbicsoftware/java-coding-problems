@@ -1,4 +1,4 @@
-package life.qbic.day8;
+package life.qbic;
 
 /**
  * <b>short description</b>
