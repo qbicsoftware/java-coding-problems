@@ -16,7 +16,7 @@ public class Problem99 {
     MyCustomObject[] testObjectSorting = new MyCustomObject[11];
     testIntSorting = fill(testIntSorting);
     testObjectSorting = fill(testObjectSorting);
-    //TODO sort test array
+    //sort test array
     System.out.println("testIntSorting = " + Arrays.toString(testIntSorting));
     bubbleSort(testIntSorting);
     System.out.println("testIntSorting (bubble sort)= " + Arrays.toString(testIntSorting));
@@ -24,15 +24,15 @@ public class Problem99 {
     System.out.println("testIntSorting = " + Arrays.toString(testIntSorting));
     Arrays.sort(testIntSorting);
     System.out.println("testIntSorting (Arrays.sort)= " + Arrays.toString(testIntSorting));
-    //TODO sort testObjectSorting
+    //sort testObjectSorting
     System.out.println("testObjectSorting (Arrays.sort)= " + Arrays.toString(testObjectSorting));
     Arrays.sort(testObjectSorting);
     System.out.println("testObjectSorting (Arrays.sort)= " + Arrays.toString(testObjectSorting));
-    //TODO shuffle test integer array
+    //shuffle test integer array
     System.out.println("previous state " + Arrays.toString((testIntSorting)));
     int [] shuffled = arrayShuffle(testIntSorting);
     System.out.println("shuffel int array " + Arrays.toString(shuffled));
-    //TODO shuffle test object array
+    //shuffle test object array
 
     int[] testBogoSorting = new int[7];
     testBogoSorting = fill(testBogoSorting);
