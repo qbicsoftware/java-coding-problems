@@ -3,6 +3,7 @@ package life.qbic.leaderboard;
 public class Player {
     final String name;
     final int score;
+    int rank;
 
     public static Player create(String name, int score) {
         if (!name.isBlank()) {
@@ -13,5 +14,13 @@ public class Player {
     private Player(String name, int score) {
         this.name = name;
         this.score = score;
+    }
+
+    public int getRank() {
+        return rank;
+    }
+
+    public void setRank(int rank) {
+        this.rank = rank;
     }
 }
