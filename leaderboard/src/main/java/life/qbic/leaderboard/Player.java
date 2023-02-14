@@ -1,6 +1,6 @@
 package life.qbic.leaderboard;
 
-public class Player {
+public class Player implements Comparable<Player> {
     final String name;
     final int score;
     int rank;
@@ -22,5 +22,10 @@ public class Player {
 
     public void setRank(int rank) {
         this.rank = rank;
+    }
+
+    @Override
+    public int compareTo(Player o) {
+        return this.score - o.score;
     }
 }
