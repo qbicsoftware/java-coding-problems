@@ -6,9 +6,10 @@ public class Player implements Comparable<Player> {
     int rank;
 
     public static Player create(String name, int score) {
-        if (!name.isBlank()) {
+        if (name.isBlank()) {
             throw new IllegalArgumentException("a players name must not be empty");
         }
+
         return new Player(name, score);
     }
     private Player(String name, int score) {
@@ -22,6 +23,10 @@ public class Player implements Comparable<Player> {
 
     public void setRank(int rank) {
         this.rank = rank;
+    }
+
+    public int getScore() {
+        return score;
     }
 
     @Override

@@ -2,6 +2,7 @@ package life.qbic.leaderboard;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 
 /**
  * <class short description - One Line!>
@@ -12,7 +13,7 @@ import java.util.Collections;
  */
 public class LeaderBoard {
 
-  private final ArrayList<Player> players;
+  private final List<Player> players;
 
   private LeaderBoard(ArrayList<Player> players) {
     this.players = players;
@@ -28,6 +29,21 @@ public class LeaderBoard {
   }
 
   public void assignRanks() {
+    int rank = 1;
+    players.get(0).setRank(rank);
+    for (int i = 1; i < players.size(); i++) {
+      Player currPlayer = players.get(i);
+      if (players.get(i - 1).getScore() == currPlayer.getScore()) {
+        currPlayer.setRank(rank);
+      } else {
+        rank++;
+        currPlayer.setRank(rank);
+      }
+    }
+  }
+
+  public List<Player> rankedPlayers() {
+    return Collections.unmodifiableList(this.players);
   }
 
 
