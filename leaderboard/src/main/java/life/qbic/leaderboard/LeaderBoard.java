@@ -1,8 +1,6 @@
 package life.qbic.leaderboard;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 /**
  * <class short description - One Line!>
@@ -14,10 +12,13 @@ import java.util.List;
 public class LeaderBoard {
 
   private final List<Player> players;
+  private final Map<Player, Integer> playerRanks;
 
   private LeaderBoard(ArrayList<Player> players) {
     this.players = players;
+    playerRanks = new HashMap<>();
     sortPlayersByScore();
+    determineRanking();
   }
 
   public static LeaderBoard create(ArrayList<Player> players) {
@@ -26,6 +27,25 @@ public class LeaderBoard {
 
   private void sortPlayersByScore() {
     Collections.sort(players);
+  }
+
+  private void determineRanking(){
+    int rank = 1;
+    Player previousPlayer;
+
+    for (Player player: players) {
+      if(previousPlayer == null){
+        continue;
+      }
+
+      if(previousPlayer.getScore() != player.getScore()) {
+        rank++;
+      }
+
+      playerRanks.put(player, rank);
+
+      previousPlayer = player;
+    }
   }
 
   public void assignRanks() {
