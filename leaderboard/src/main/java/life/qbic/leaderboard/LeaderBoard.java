@@ -31,15 +31,15 @@ public class LeaderBoard {
 
   private void assignRanks() {
     sortPlayersByScore();
-    int rank = 1;
-    players.get(0).setRank(rank);
-    for (int i = 1; i < players.size(); i++) {
-      Player currPlayer = players.get(i);
-      if (players.get(i - 1).getScore() == currPlayer.getScore()) {
-        currPlayer.setRank(rank);
+    players.get(0).setRank(1);
+    int lastAssignedRank = 1;
+    for (int rank = 1; rank < players.size(); rank++) {
+      Player currPlayer = players.get(rank);
+      if (players.get(rank - 1).getScore() == currPlayer.getScore()) {
+        currPlayer.setRank(lastAssignedRank);
       } else {
-        rank++;
-        currPlayer.setRank(rank);
+        currPlayer.setRank(rank+1);
+        lastAssignedRank = rank+1;
       }
     }
   }
