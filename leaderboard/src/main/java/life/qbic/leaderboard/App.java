@@ -9,20 +9,27 @@ public class App {
      */
     public static void main(String[] args) {
         Leaderboard leaderBoard = new Leaderboard();
-        leaderBoard.addPlayer(new Player("Sven", 9000));
-        leaderBoard.addPlayer(new Player("Tobi", 5000));
-        leaderBoard.addPlayer(new Player("Steffen", Integer.MAX_VALUE));
-        leaderBoard.addPlayer(new Player("IntelliJ IDE", Integer.MAX_VALUE));
+        leaderBoard.addPlayer(new Player("Sven", 42));
+        leaderBoard.addPlayer(new Player("Tobi", 42));
+        leaderBoard.addPlayer(new Player("Olena", 42));
+        leaderBoard.addPlayer(new Player("Jenni", 42));
+        leaderBoard.addPlayer(new Player("Andreas", 42));
+        leaderBoard.addPlayer(new Player("Aline", 42));
+        leaderBoard.addPlayer(new Player("Steffen", 42));
+        leaderBoard.addPlayer(new Player("IntelliJ", Integer.MAX_VALUE));
+        leaderBoard.addPlayer(new Player("Bug Mc Buggy", 0));
 
         String header = """
-            This is an AWESOME leaderboard. Only the best players in the world can make it here.
-            o.O WOOOOOOW!
-            
-            #rank\t#player\t#score
+            #########################################################
+            This is an AWESOME leaderboard. 
+                Only the best players in the world can make it here.
+            #########################################################\
             """;
         System.out.println(header);
+        System.out.printf("#%-15s#%-15s#%-15s%n", "rank", "name", "score");
         leaderBoard.ranked().forEach(it ->
-            System.out.println(it.rank() + ":\t" + it.player().name() + "\t" + it.player().score()));
+            System.out.printf("%-15s%-15s%-15s%n", it.rank(), it.player().name(),
+                it.player().score()));
     }
 
 }
