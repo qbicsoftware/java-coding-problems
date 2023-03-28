@@ -26,7 +26,7 @@ public class App {
             #########################################################\
             """;
         System.out.println(header);
-        System.out.printf("#%-15s#%-15s#%-15s%n", "rank", "name", "score");
+        System.out.printf("#%-14s#%-14s#%-14s%n", "rank", "name", "score");
         leaderBoard.ranked().forEach(it ->
             System.out.printf("%-15s%-15s%-15s%n", it.rank(), it.player().name(),
                 it.player().score()));
