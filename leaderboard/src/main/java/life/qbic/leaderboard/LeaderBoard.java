@@ -2,6 +2,7 @@ package life.qbic.leaderboard;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -17,7 +18,7 @@ public class LeaderBoard {
 
   private LeaderBoard(ArrayList<Player> players) {
     this.players = players;
-    sortPlayersByScore();
+    assignRanks();
   }
 
   public static LeaderBoard create(ArrayList<Player> players) {
@@ -25,10 +26,11 @@ public class LeaderBoard {
   }
 
   private void sortPlayersByScore() {
-    Collections.sort(players);
+    players.sort(Comparator.comparing(Player::getScore).reversed());
   }
 
-  public void assignRanks() {
+  private void assignRanks() {
+    sortPlayersByScore();
     int rank = 1;
     players.get(0).setRank(rank);
     for (int i = 1; i < players.size(); i++) {

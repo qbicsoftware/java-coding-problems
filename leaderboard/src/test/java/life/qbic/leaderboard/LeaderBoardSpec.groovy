@@ -11,20 +11,19 @@ import spock.lang.Specification
  */
 class LeaderBoardSpec extends Specification {
 
-    def "test that ranks are assigned corretly"() {
+    def "when the leaderboard is filled then all items are ranked"() {
+        given: "some players"
         def tom = Player.create("Tom", 0)
         def tim = Player.create("Tim", 100)
         def jim = Player.create("Jim", 42)
-        given:
-        List<Player> players = [tom, tim, jim]
-        LeaderBoard leaderBoard = LeaderBoard.create(players)
+        when: "the leaderboard is filled"
+        LeaderBoard leaderBoard = LeaderBoard.create([tom, tim, jim])
 
-        when:
-        leaderBoard.assignRanks()
-
-        then:
-        leaderBoard.rankedPlayers() == [tom, jim, tim]
-
+        then: "all items are ranked"
+        leaderBoard.rankedPlayers() == [tim, jim, tom]
+        leaderBoard.rankedPlayers()[0].getRank() == 1
+        leaderBoard.rankedPlayers()[1].getRank() == 2
+        leaderBoard.rankedPlayers()[2].getRank() == 3
     }
 
     def "test that two players with the same score are assigned the same rank"() {
