@@ -1,7 +1,14 @@
 package life.qbic;
 
 
+import java.util.Random;
+
 public class Isbn10 {
+    private final String digits;
+
+    private Isbn10(String digits) {
+        this.digits = digits;
+    }
 
     public static Isbn10 parse(String s) {
         String cleanedString = removeNotAllowedCharacters(s.trim());
@@ -9,7 +16,22 @@ public class Isbn10 {
         String firstPart = cleanedString.substring(0, 9);
         String checkDigitInput = cleanedString.substring(9);
         validateCheckDigit(checkDigitInput, computeCheckDigit(firstPart));
-        return new Isbn10();
+        return new Isbn10(s);
+    }
+    public static Isbn10 generate() {
+        // input 9 digits
+        int[] digits = generateDigits();
+        StringBuilder inDigits = new StringBuilder();
+        for (int digit : digits) {
+            inDigits.append(digit);
+        }
+        // multiply each digit by position
+        int checkDigit = computeCheckDigit(inDigits.toString());
+        return new Isbn10(inDigits.toString() + (checkDigit == 10 ? "X" : checkDigit));
+    }
+
+    private static int[] generateDigits() {
+        return new Random().ints(9, 0, 10).toArray();
     }
 
     private static void validateCheckDigit(String checkDigitInput, int expectedCheckDigit) {
@@ -37,6 +59,10 @@ public class Isbn10 {
             sum += currentDigit * (i+1);
         }
         return sum % 11;
+    }
+
+    public String value() {
+        return digits;
     }
 
 }
