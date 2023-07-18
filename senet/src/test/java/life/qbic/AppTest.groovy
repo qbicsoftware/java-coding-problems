@@ -1,5 +1,3 @@
-package life.qbic
-
 import org.spockframework.util.Assert
 import spock.lang.Specification
 
