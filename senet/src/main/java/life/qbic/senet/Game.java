@@ -13,8 +13,11 @@ import java.util.Scanner;
 public class Game {
 
   private final GameBoard gameBoard = new GameBoard();
-  String player1 = "1";//"𓀅";
-  String player2 = "2";//"𓀀";
+//  String player1 = "1";//"𓀅";
+  String player1 = "𓀅";
+//  String player2 = "2";//"𓀀";
+  String player2 = "𓀀";
+  private final GameBoardRenderer gameBoardRenderer = new GameBoardConsoleRenderer();
 
   public Game() {
     gameBoard.setupFields(player1, player2);
@@ -30,7 +33,7 @@ public class Game {
     // player throws knuckle bones
     int moves = Knucklebones.throwBones();
     // player inputs pawn on field
-    gameBoard.show();
+    gameBoardRenderer.render(gameBoard);
     int chosenPawn = choosePawn();
     gameBoard.isValidPawn(chosenPawn, player);
     System.out.println(gameBoard.isValidPawn(chosenPawn, player));
@@ -43,5 +46,11 @@ public class Game {
   private int choosePawn() {
     Scanner scanner = new Scanner(System.in);
     return Integer.parseInt(scanner.nextLine()) - 1;
+  }
+
+  @FunctionalInterface
+  public interface GameBoardRenderer {
+
+    void render(GameBoard gameBoard);
   }
 }
