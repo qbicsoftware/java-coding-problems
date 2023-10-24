@@ -24,19 +24,29 @@ public class Game {
   }
 
   public void play() {
-    takeTurn(player1);
-    takeTurn(player2);
+    while (true) {
+      takeTurn(player1);
+      takeTurn(player2);
+    }
   }
 
   public void takeTurn(String player) {
     System.out.println("Player '" + player + "' takes turn:");
     // player throws knuckle bones
     int moves = Knucklebones.throwBones();
-    // player inputs pawn on field
+    // show moves to player
+    System.out.println(
+        "You look at the knucklebones in your lap and see that you can move a pawn " + moves
+            + " houses.");
     gameBoardRenderer.render(gameBoard);
-    int chosenPawn = choosePawn();
-    gameBoard.isValidPawn(chosenPawn, player);
-    System.out.println(gameBoard.isValidPawn(chosenPawn, player));
+
+    int houseOfChosenPawn = choosePawn();
+    boolean isValidMove = gameBoard.isValidMove(houseOfChosenPawn,  houseOfChosenPawn + moves, player);
+//    System.out.println("isValidMove = " + isValidMove);
+    if (isValidMove) {
+      //move pawn
+      gameBoard.move(houseOfChosenPawn, houseOfChosenPawn + moves);
+    }
     // player moves pawn
 
     // game executes move
@@ -44,8 +54,9 @@ public class Game {
   }
 
   private int choosePawn() {
+    System.out.println("Please enter the position of the pawn you want to move");
     Scanner scanner = new Scanner(System.in);
-    return Integer.parseInt(scanner.nextLine()) - 1;
+    return Integer.parseInt(scanner.nextLine());
   }
 
   @FunctionalInterface

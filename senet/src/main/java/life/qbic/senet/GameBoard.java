@@ -1,10 +1,5 @@
 package life.qbic.senet;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Iterator;
-import java.util.List;
 import java.util.Optional;
 
 /**
@@ -12,26 +7,26 @@ import java.util.Optional;
  */
 public class GameBoard {
 
-  public static final class Field {
+  public static final class House {
 
     private String pawn = "";
 
-    public static Field empty() {
-      return new Field();
+    public static House empty() {
+      return new House();
     }
 
-    public static Field withPawn(String pawn) {
-      Field field = new Field();
-      field.pawn = pawn;
-      return field;
+    public static House withPawn(String pawn) {
+      House house = new House();
+      house.pawn = pawn;
+      return house;
     }
 
 
     private boolean isOccupied() {
-      return pawn.isBlank();
+      return !pawn.isBlank();
     }
 
-    private void movePawnTo(Field target) {
+    private void movePawnTo(House target) {
       if (target.isOccupied()) {
         swap(target);
       } else {
@@ -39,12 +34,12 @@ public class GameBoard {
       }
     }
 
-    private void move(Field target) {
+    private void move(House target) {
       target.pawn = this.pawn;
       this.pawn = "";
     }
 
-    private void swap(Field target) {
+    private void swap(House target) {
       var temp = target.pawn;
       target.pawn = this.pawn;
       this.pawn = temp;
@@ -56,32 +51,51 @@ public class GameBoard {
   }
 
   static final int NUMBER_OF_FIELDS = 30;
-  Field[] fields = new Field[NUMBER_OF_FIELDS];
+  House[] houses = new House[NUMBER_OF_FIELDS];
+
+  public void move(int from, int to) {
+    houses[from - 1].movePawnTo(houses[to - 1]);
+  }
 
   public void setupFields(String player1, String player2) {
     for (int i = 1; i <= 14; i++) {
       if (i % 2 == 0) {
-        fields[i - 1] = Field.withPawn(player2);
+        houses[i - 1] = House.withPawn(player2);
       } else {
-        fields[i - 1] = Field.withPawn(player1);
+        houses[i - 1] = House.withPawn(player1);
       }
     }
     for (int i = 14; i < NUMBER_OF_FIELDS; i++) {
-      fields[i] = Field.empty();
+      houses[i] = House.empty();
     }
 
   }
 
   /**
    *
-   * @param position 1-based position up to the number of fields included
+   * @param position 1-based position up to the number of houses included
    * @return the pawn or empty optional
    */
   public Optional<String> getPawnAt(int position) {
-    return Optional.ofNullable(fields[position - 1].getPawn());
+    return Optional.ofNullable(houses[position - 1].getPawn());
   }
 
-  public boolean isValidPawn(int chosenPawn, String player) {
-    return fields[chosenPawn].getPawn().equals(player);
+  /**
+   *
+   * @param chosenPawn
+   * @param player
+   * @return true only if the field contains a pawn with the player
+   */
+  public boolean pawnBelongsToPlayer(int chosenPawn, String player) {
+    return getPawnAt(chosenPawn)
+        .map(it -> it.equals(player))
+        .orElse(false);
   }
+
+  public boolean isValidMove(int fromHouse, int toHouse, String player) {
+    return pawnBelongsToPlayer(fromHouse, player)
+        && !pawnBelongsToPlayer(toHouse, player);
+
+  }
+
 }
