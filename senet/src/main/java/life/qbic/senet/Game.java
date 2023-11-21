@@ -13,25 +13,40 @@ import java.util.Scanner;
 public class Game {
 
   private final GameBoard gameBoard = new GameBoard();
-//  String player1 = "1";//"𓀅";
-  String player1 = "𓀅";
-//  String player2 = "2";//"𓀀";
-  String player2 = "𓀀";
+  //  String player1 = "1";//"𓀅";
+  Player player1 = new Player("𓀅", 7);
+  //  String player2 = "2";//"𓀀";
+  Player player2 = new Player("𓀀", 7);
   private final GameBoardRenderer gameBoardRenderer = new GameBoardConsoleRenderer();
+  private boolean noOneHasWon;
 
   public Game() {
     gameBoard.setupFields(player1, player2);
+    gameBoard.addListener(pawnRemoved -> {
+      if (player1.getPlayerSymbol().equals(pawnRemoved.pawn())) {
+        player1.decreasePawnCount();
+      }
+      if (player2.getPlayerSymbol().equals(pawnRemoved.pawn())) {
+        player2.decreasePawnCount();
+      }
+    });
   }
 
   public void play() {
-    while (true) {
-      takeTurn(player1);
+    noOneHasWon = true;
+    while (noOneHasWon) {
+      nextTurn();
+      takeTurn(player1); //TODO replace
       takeTurn(player2);
     }
   }
 
-  public void takeTurn(String player) {
-    System.out.println("Player '" + player + "' takes turn:");
+  private void nextTurn() {
+    //TODO take turn for current player and set current player as field.
+  }
+
+  public void takeTurn(Player player) {
+    System.out.println("Player '" + player.getPlayerSymbol() + "' takes turn:");
     // player throws knuckle bones
     int moves = Knucklebones.throwBones();
     // show moves to player
@@ -40,13 +55,19 @@ public class Game {
             + " houses.");
     gameBoardRenderer.render(gameBoard);
 
-    int houseOfChosenPawn = choosePawn();
-    boolean isValidMove = gameBoard.isValidMove(houseOfChosenPawn,  houseOfChosenPawn + moves, player);
+    boolean isValidMove;
+    do {
+      int houseOfChosenPawn = choosePawn();
+      isValidMove = gameBoard.isValidMove(houseOfChosenPawn, houseOfChosenPawn + moves,
+          player);
 //    System.out.println("isValidMove = " + isValidMove);
-    if (isValidMove) {
-      //move pawn
-      gameBoard.move(houseOfChosenPawn, houseOfChosenPawn + moves);
-    }
+      if (isValidMove) {
+        //move pawn
+        gameBoard.move(houseOfChosenPawn, houseOfChosenPawn + moves);
+      } else {
+        System.out.println("You cannot move this pawn " + moves + " houses. Please choose a different pawn to move.");
+      }
+    } while (!isValidMove);
     // player moves pawn
 
     // game executes move
