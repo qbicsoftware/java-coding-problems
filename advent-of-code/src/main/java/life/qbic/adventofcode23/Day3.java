@@ -1,7 +1,11 @@
 package life.qbic.adventofcode23;
 
+import static java.util.logging.Logger.getLogger;
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * <class short description - One Line!>
@@ -13,31 +17,31 @@ import java.util.List;
  */
 public class Day3 {
 
+  private static final Logger logger = getLogger(Day3.class.getName());
+
   public List<String> parseInput(String filePath) {
-    return new ArrayList<String>();
+    return new ArrayList<>();
   }
 
-  public int sumOfAllValidParts(List<String> input) {
+  public static int sumOfAllValidParts(List<String> input) {
     char[][] schematic = convertListToArray(input);
     List<Position> symbols = findSymbols(schematic);
-    System.out.println("symbols = " + symbols);
+    logger.log(Level.INFO, () -> "symbols = " + symbols);
     return 0;
   }
 
-  private List<Position> retrieveValidNumberPosition(Position symbolPosition, char[][] schematic) {
+  private static List<Position> retrieveValidNumberPosition(Position symbolPosition, char[][] schematic) {
     List<Position> validNumber = new ArrayList<>();
+    //TODO
     return validNumber;
   }
 
-  private List<Position> findSymbols(char[][] schematic) {
+  private static List<Position> findSymbols(char[][] schematic) {
     List<Position> symbols = new ArrayList<>();
     for (int row = 0; row < schematic.length; row++) {
       for (int col = 0; col < schematic[row].length; col++) {
         char currentSymbol = schematic[row][col];
-        if (Character.isDigit(currentSymbol)) {
-          continue;
-        }
-        if (currentSymbol == '.') {
+        if (Character.isDigit(currentSymbol) || currentSymbol == '.') {
           continue;
         }
         Position position = new Position(row, col);
@@ -48,7 +52,7 @@ public class Day3 {
     return symbols;
   }
 
-  private char[][] convertListToArray(List<String> input) {
+  private static char[][] convertListToArray(List<String> input) {
     int rowCount = input.size();
     int columnCount = input.getFirst().length();
     char[][] schematic = new char[rowCount][columnCount];

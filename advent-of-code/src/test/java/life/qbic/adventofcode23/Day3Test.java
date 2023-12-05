@@ -1,6 +1,7 @@
 package life.qbic.adventofcode23;
 
 import java.util.List;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -28,9 +29,9 @@ class Day3Test {
 
   @Test
   void TestDay3() {
-    Day3 day3 = new Day3();
-    List<String> awesomeInput = input.lines().toList();
-    day3.sumOfAllValidParts(awesomeInput);
+    int result = Day3.sumOfAllValidParts(input.lines().toList());
+
+    Assertions.assertEquals(4361, result);
   }
 
 }
