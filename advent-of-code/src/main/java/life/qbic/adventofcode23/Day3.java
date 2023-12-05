@@ -2,10 +2,18 @@ package life.qbic.adventofcode23;
 
 import static java.util.logging.Logger.getLogger;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.URISyntaxException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.stream.Stream;
 
 /**
  * --- Day 3: Gear Ratios ---
@@ -56,8 +64,11 @@ public class Day3 {
 
   private static final Logger logger = getLogger(Day3.class.getName());
 
-  public List<String> parseInput(String filePath) {
-    return new ArrayList<>();
+  public static List<String> parseInput(String filePath) {
+      Stream<String> lines = new BufferedReader(new InputStreamReader(
+          Objects.requireNonNull(Day3.class.getResourceAsStream(filePath),
+              "File does not exist."))).lines();
+    return lines.toList();
   }
 
   public static int sumOfAllValidParts(List<String> input) {
