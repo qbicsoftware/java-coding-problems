@@ -10,6 +10,8 @@ import java.util.logging.Logger;
 /**
  * --- Day 3: Gear Ratios ---
  * <p>
+ * <a href="https://adventofcode.com/2023/day/3">Advent of Code - Day 3</a>
+ * <p>
  * You and the Elf eventually reach a gondola lift station; he says the
  * gondola lift will take you up to the water source, but this is as far as he can bring you. You go
  * inside.
