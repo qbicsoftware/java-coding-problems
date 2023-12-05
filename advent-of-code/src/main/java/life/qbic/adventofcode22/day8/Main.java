@@ -1,8 +1,8 @@
-package life.qbic.day8;
+package life.qbic.adventofcode22.day8;
 
 import java.util.Arrays;
 import java.util.List;
-import life.qbic.Inputs;
+import life.qbic.adventofcode22.Inputs;
 
 /**
  * <b>short description</b>

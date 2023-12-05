@@ -1,4 +1,4 @@
-package life.qbic;
+package life.qbic.adventofcode22;
 
 /**
  * <b>short description</b>
