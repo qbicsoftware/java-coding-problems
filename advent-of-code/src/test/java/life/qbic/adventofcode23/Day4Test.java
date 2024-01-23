@@ -3,7 +3,6 @@ package life.qbic.adventofcode23;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -253,15 +252,28 @@ public class Day4Test {
   @Test
   void mytest() {
     Day4 day4 = new Day4();
-    int result = day4.parseInput(testInput);
+    int result = day4.parseInputToPoints(testInput);
     assertEquals(13, result);
   }
 
   @Test
   void actualInput() {
     Day4 day4 = new Day4();
-    int result = day4.parseInput(actualInput);
+    int result = day4.parseInputToPoints(actualInput);
     assertEquals(23941, result);
   }
 
+  @Test
+  void absoluteInsanityTest() {
+    Day4 day4 = new Day4();
+    int result = day4.parseInputToScratchCards(testInput);
+    assertEquals(30, result);
+  }
+
+  @Test
+  void absoluteInsanityRealTest() {
+    Day4 day4 = new Day4();
+    int result = day4.parseInputToScratchCards(actualInput);
+    assertEquals(5571760, result);
+  }
 }

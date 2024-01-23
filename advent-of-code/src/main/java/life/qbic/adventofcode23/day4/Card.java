@@ -14,14 +14,6 @@ import java.util.stream.Collectors;
  * @since <version tag>
  */
 public record Card(String cardName, Set<Integer> winningNumbers, Set<Integer> cardNumbers) {
-  public int points() {
-    HashSet<Integer> intersection = new HashSet<>(winningNumbers);
-    intersection.retainAll(cardNumbers);
-    if (intersection.isEmpty()) {
-      return 0;
-    }
-    return (int) Math.pow(2, (intersection.size() - 1));
-  }
 
   public static Card parse(String s) {
     String[] split = s.split(":");
@@ -40,4 +32,9 @@ public record Card(String cardName, Set<Integer> winningNumbers, Set<Integer> ca
     return new Card(name, winningNumbers, cardNumbers);
   }
 
+  public int winningCount() {
+    HashSet<Integer> intersection = new HashSet<>(winningNumbers);
+    intersection.retainAll(cardNumbers);
+    return intersection.size();
+  }
 }

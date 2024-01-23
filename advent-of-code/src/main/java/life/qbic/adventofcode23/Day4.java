@@ -1,8 +1,8 @@
 package life.qbic.adventofcode23;
 
 import java.util.List;
-import java.util.stream.Stream;
 import life.qbic.adventofcode23.day4.Card;
+import life.qbic.adventofcode23.day4.Evaluator;
 
 /**
  * TODO!
@@ -14,11 +14,16 @@ import life.qbic.adventofcode23.day4.Card;
  */
 public class Day4 {
 
-  public int parseInput(String input) {
+  public int parseInputToPoints(String input) {
     List<Card> cards = input.lines().map(Card::parse).toList();
     return cards.stream()
-        .map(Card::points)
+        .map(Evaluator::points)
         .reduce(0, Integer::sum);
+  }
+
+  public int parseInputToScratchCards(String input) {
+    List<Card> cards = input.lines().map(Card::parse).toList();
+    return Evaluator.totalScratchCardCount(cards);
   }
 
 }
